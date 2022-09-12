@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
+import com.example.movieapp.databinding.ExpandedMovieCardBinding
 import com.example.movieapp.databinding.MovieCardBinding
 import com.example.movieapp.home.data.MovieModel
 
-class MoviesAdapter(
+class ExpandedMoviesAdapter(
     private val movies: List<MovieModel>
-) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+) : RecyclerView.Adapter<ExpandedMoviesAdapter.MoviesViewHolder>() {
     private var displayedMovies = movies
 
-    class MoviesViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MoviesViewHolder(private val binding: ExpandedMovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: MovieModel) {
             Glide
@@ -29,7 +30,7 @@ class MoviesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val binding = MovieCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ExpandedMovieCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MoviesViewHolder(binding)
     }
 

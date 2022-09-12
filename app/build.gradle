@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs'
 }
-
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdk 32
 
@@ -32,6 +32,7 @@ android {
     }
     buildFeatures{
         viewBinding true
+        dataBinding true
     }
 }
 

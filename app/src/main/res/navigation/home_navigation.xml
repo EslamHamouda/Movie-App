@@ -9,5 +9,32 @@
         android:id="@+id/homeFragment"
         android:name="com.example.movieapp.home.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_expandedListFragment"
+            app:destination="@id/expandedListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/expandedListFragment"
+        android:name="com.example.movieapp.home.ui.ExpandedListFragment"
+        tools:layout="@layout/fragment_expanded_list"
+        android:label="ExpandedListFragment" >
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="list"
+            app:argType="com.example.movieapp.home.data.MovieModel[]" />
+        <action
+            android:id="@+id/action_expandedListFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
 </navigation>

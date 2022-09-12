@@ -11,4 +11,11 @@
     <string name="action_movies">Action Movies</string>
     <string name="view_all">View all</string>
     <string name="expanded_image">expanded_image</string>
+    <string name="arrow_back">arrow_back</string>
+    <string name="account_image">account_image</string>
+    <string name="movie_image">movie_image</string>
+    <string name="top_image">top_image</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="watch_list">Watch list</string>
 </resources>

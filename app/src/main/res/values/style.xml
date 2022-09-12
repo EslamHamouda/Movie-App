@@ -4,4 +4,7 @@
         <item name="textAllCaps">false</item>
         <item name="fontFamily">@font/louis_bold</item>
     </style>
+    <style name="search_style" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorHint">@color/purple_700</item>
+    </style>
 </resources>

@@ -16,14 +16,6 @@
                motion:motionTarget="@+id/rv_top_movies"
                motion:framePosition="50"
                android:alpha="0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/rv_top_movies"
-               motion:framePosition="100"
-               android:scaleX="0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/rv_top_movies"
-               motion:framePosition="100"
-               android:scaleY="0" />
        </KeyFrameSet>
         <OnSwipe
             motion:touchAnchorId="@+id/rv_top_movies"

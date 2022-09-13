@@ -5,7 +5,7 @@
     <string name="top_rated">Top rated</string>
     <string name="popular">Popular</string>
     <string name="welcome_home_ahmed">Welcome home, Ahmed</string>
-    <string name="explore">Explore ...</string>
+    <string name="explore">Explore …</string>
     <string name="view_all">View all</string>
     <string name="expanded_image">expanded_image</string>
     <string name="arrow_back">arrow_back</string>
@@ -17,4 +17,16 @@
     <string name="watch_list">Watch list</string>
     <string name="director">Director</string>
     <string name="category">Category</string>
+    <string name="splash_logo">splash logo</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="don_t_have_an_account">Don’t have an account?<font color="@android:color/holo_blue_dark"> Register</font></string>
+    <string name="already_have_account">Already have account?<font color="@android:color/holo_blue_dark"> Login</font></string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="password">Password</string>
+    <string name="new_account">New account!</string>
+    <string name="register">Register</string>
+    <string name="full_name">Full name</string>
+    <string name="phone_number">Phone number</string>
 </resources>

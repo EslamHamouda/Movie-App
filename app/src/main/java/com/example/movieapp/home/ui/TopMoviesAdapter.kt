@@ -2,6 +2,7 @@ package com.example.movieapp.home.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
@@ -19,7 +20,10 @@ class TopMoviesAdapter(
                 .load(item.imageURL)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
-                .into(binding.roundedImageView);
+                .into(binding.roundedImageView)
+            binding.roundedImageView.setOnClickListener{
+                it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item))
+            }
         }
     }
 

@@ -4,4 +4,17 @@
     <string name="upcoming">Upcoming</string>
     <string name="top_rated">Top rated</string>
     <string name="popular">Popular</string>
+    <string name="welcome_home_ahmed">Welcome home, Ahmed</string>
+    <string name="explore">Explore ...</string>
+    <string name="view_all">View all</string>
+    <string name="expanded_image">expanded_image</string>
+    <string name="arrow_back">arrow_back</string>
+    <string name="account_image">account_image</string>
+    <string name="movie_image">movie_image</string>
+    <string name="top_image">top_image</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="watch_list">Watch list</string>
+    <string name="director">Director</string>
+    <string name="category">Category</string>
 </resources>

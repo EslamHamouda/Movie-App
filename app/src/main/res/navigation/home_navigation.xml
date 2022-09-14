@@ -11,8 +11,8 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_expandedListFragment"
-            app:destination="@id/expandedListFragment"
+            android:id="@+id/action_homeFragment_to_expandedMoviesFragment"
+            app:destination="@id/expandedMoviesFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -20,12 +20,19 @@
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_expandedActorsFragment"
+            app:destination="@id/expandedActorsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/expandedListFragment"
-        android:name="com.example.movieapp.home.ui.ExpandedListFragment"
-        tools:layout="@layout/fragment_expanded_list"
-        android:label="ExpandedListFragment" >
+        android:id="@+id/expandedMoviesFragment"
+        android:name="com.example.movieapp.home.ui.ExpandedMoviesFragment"
+        tools:layout="@layout/fragment_expanded_movies"
+        android:label="ExpandedMoviesFragment" >
         <argument
             android:name="category"
             app:argType="string" />
@@ -33,7 +40,7 @@
             android:name="list"
             app:argType="com.example.movieapp.home.data.MovieModel[]" />
         <action
-            android:id="@+id/action_expandedListFragment_to_homeFragment"
+            android:id="@+id/action_expandedMoviesFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
@@ -56,5 +63,21 @@
         <action
             android:id="@+id/action_detailsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/expandedActorsFragment"
+        android:name="com.example.movieapp.home.ui.ExpandedActorsFragment"
+        tools:layout="@layout/fragment_expanded_actors"
+        android:label="ExpandedActorsFragment" >
+        <action
+            android:id="@+id/action_expandedActorsFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="list"
+            app:argType="com.example.movieapp.home.data.ActorModel[]" />
     </fragment>
 </navigation>

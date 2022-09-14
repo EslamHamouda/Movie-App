@@ -1,25 +1,27 @@
 package com.example.movieapp.home.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentHomeBinding
+import com.example.movieapp.home.data.ActorModel
+import com.example.movieapp.home.view_model.HomeViewModel
 import com.example.moviestorenew.home.data.DataSource
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
+    val viewModel:HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        viewModel.getActors()
     }
 
     override fun onCreateView(
@@ -34,13 +36,27 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvTopMovies.adapter = TopMoviesAdapter(DataSource.getTopMovies())
-        binding.rvActionMovies.adapter=MoviesAdapter(DataSource.getMovies())
-        binding.tvActionViewAll.setOnClickListener{toExpandedList()}
+        binding.rvActionMovies.adapter=MoviesAdapter(DataSource.getMovies(),false)
+
+        lifecycleScope.launch {
+            viewModel.getActorsLiveData.observe(viewLifecycleOwner) {list->
+                binding.rvActorsMovies.adapter= list.body()?.let { it1 -> ActorsAdapter(it1,false) }
+                binding.tvActorsViewAll.setOnClickListener{toExpandedActors(list)}
+            }
+
+        }
+        //binding.rvActorsMovies.adapter=ActorsAdapter(DataSource.getMovies(),false)
+        binding.tvActionViewAll.setOnClickListener{toExpandedMovies()}
+        //binding.tvActorsViewAll.setOnClickListener{toExpandedActors()}
     }
 
-    private fun toExpandedList()
+    private fun toExpandedMovies()
     {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedListFragment("Action Movies",DataSource.getMovies().toTypedArray()))
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedMoviesFragment("Action Movies",DataSource.getMovies().toTypedArray()))
+    }
+    private fun toExpandedActors(list:Response<List<ActorModel>>)
+    {
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedActorsFragment(list.body()!!.toTypedArray()))
     }
 
 }

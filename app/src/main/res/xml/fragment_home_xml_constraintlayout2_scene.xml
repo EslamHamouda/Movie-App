@@ -23,6 +23,26 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:layout_marginTop="1dp"
+            motion:layout_editor_absoluteX="1dp"
+            motion:layout_constraintTop_toBottomOf="@+id/rv_action_movies"
+            android:id="@+id/recyclerView" />
+        <Constraint
+            motion:layout_constraintTop_toBottomOf="@+id/rv_action_movies"
+            android:id="@+id/recyclerView2"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_editor_absoluteX="1dp" />
+        <Constraint
+            motion:layout_constraintTop_toBottomOf="@+id/rv_action_movies"
+            android:id="@+id/recyclerView3" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/textView4"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/rv_action_movies"
+            motion:layout_constraintBottom_toBottomOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

@@ -21,12 +21,16 @@
         <entry key="..\:/Movieapp/app/src/main/res/layout/activity_auth.xml" value="0.13333333333333333" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/activity_main.xml" value="0.14719202898550723" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/activity_splash2.xml" value="0.13333333333333333" />
+        <entry key="..\:/Movieapp/app/src/main/res/layout/actor_card.xml" value="0.1326388888888889" />
+        <entry key="..\:/Movieapp/app/src/main/res/layout/expanded_actor_card.xml" value="0.13333333333333333" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/expanded_movie_card.xml" value="0.14719202898550723" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_details.xml" value="0.16" />
+        <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_expanded_actors.xml" value="0.13333333333333333" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_expanded_list.xml" value="0.16417272338606242" />
-        <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_home.xml" value="0.13333333333333333" />
+        <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_expanded_movies.xml" value="0.13333333333333333" />
+        <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_home.xml" value="0.12" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_login.xml" value="0.14" />
-        <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_register.xml" value="0.12395833333333334" />
+        <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_register.xml" value="0.13333333333333333" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_search.xml" value="0.16" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/fragment_splash.xml" value="0.13333333333333333" />
         <entry key="..\:/Movieapp/app/src/main/res/layout/ifuneed.xml" value="0.25" />

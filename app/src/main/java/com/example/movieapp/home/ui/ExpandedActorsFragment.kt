@@ -1,17 +1,18 @@
 package com.example.movieapp.home.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.movieapp.databinding.FragmentExpandedListBinding
+import com.example.movieapp.databinding.FragmentExpandedActorsBinding
 
-class ExpandedListFragment : Fragment() {
-    lateinit var binding: FragmentExpandedListBinding
-    val args:ExpandedListFragmentArgs by navArgs()
+
+class ExpandedActorsFragment : Fragment() {
+    lateinit var binding: FragmentExpandedActorsBinding
+    val args:ExpandedActorsFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -22,19 +23,18 @@ class ExpandedListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding=FragmentExpandedListBinding.inflate(inflater)
+        binding=FragmentExpandedActorsBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvCategoryName.text=args.category
-        binding.rvExpandedMovieList.adapter=ExpandedMoviesAdapter(args.list.asList())
+        binding.rvExpandedActorList.adapter=ActorsAdapter(args.list.asList(),true)
         binding.arrowBack.setOnClickListener{goHome()}
     }
-
     private fun goHome(){
-        findNavController().navigate(ExpandedListFragmentDirections.actionExpandedListFragmentToHomeFragment())
+        findNavController().navigate(ExpandedActorsFragmentDirections.actionExpandedActorsFragmentToHomeFragment())
     }
+
 
 }

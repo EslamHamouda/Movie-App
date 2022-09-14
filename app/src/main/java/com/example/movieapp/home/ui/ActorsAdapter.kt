@@ -5,41 +5,40 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
-import com.example.movieapp.databinding.MovieCardBinding
+import com.example.movieapp.databinding.ActorCardBinding
+import com.example.movieapp.home.data.ActorModel
 import com.example.movieapp.home.data.MovieModel
 
-class MoviesAdapter(
-    private val movies: List<MovieModel>,private val flag: Boolean
-) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
-    private var displayedMovies = movies
+class ActorsAdapter(
+    private val actors: List<ActorModel>,private val flag:Boolean
+) : RecyclerView.Adapter<ActorsAdapter.MoviesViewHolder>() {
+    private var displayedMovies = actors
 
-    class MoviesViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MoviesViewHolder(private val binding: ActorCardBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MovieModel) {
+        fun bind(item: ActorModel) {
             Glide
                 .with(itemView.context)
-                .load(item.imageURL)
+                .load(item.actorImagePath)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(binding.roundedImageView)
-            binding.tvMovieName.text=item.title
-            binding.tvMovieTime.text="1h 12m"
+            binding.tvActorName.text=item.actorName
 
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val binding = MovieCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ActorCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MoviesViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(actors[position])
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount():Int {
         val size=if(flag) displayedMovies.size else displayedMovies.take(3).size
         return size
     }
-
 }

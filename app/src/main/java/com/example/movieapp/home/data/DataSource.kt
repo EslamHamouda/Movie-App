@@ -1,6 +1,4 @@
-package com.example.moviestorenew.home.data
-
-import com.example.movieapp.home.data.MovieModel
+package com.example.movieapp.home.data
 
 class DataSource {
     companion object {

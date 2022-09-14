@@ -1,26 +1,24 @@
 package com.example.movieapp.auth.login.ui
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.movieapp.R
-import com.example.movieapp.auth.data.ApiInterface
-import com.example.movieapp.auth.data.UserModel
+import com.example.movieapp.MainActivity
+import com.example.movieapp.auth.view_model.AuthViewModel
 import com.example.movieapp.databinding.FragmentLoginBinding
-import okhttp3.MediaType
-import okhttp3.RequestBody
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
+    val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,41 +35,33 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.tvRegister.setOnClickListener { goRegister() }
-        binding.btnLogin.setOnClickListener { login() }
+
+        binding.btnLogin.setOnClickListener { viewModel.login(getLoginData()) }
+
+        lifecycleScope.launch {
+            viewModel.loginResponse.observe(viewLifecycleOwner) {
+                if (it.isSuccessful){
+                    Toast.makeText(requireContext(),"Login success", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireActivity(),MainActivity::class.java))
+                    requireActivity().finish()
+                }
+                else{
+                    Toast.makeText(requireContext(),"Login failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun getLoginData():Map<String,String>{
+        val body= mutableMapOf<String,String>()
+        body["email"]=binding.etEmail.text.toString()
+        body["password"]=binding.edPassword.text.toString()
+        return body
     }
 
     private fun goRegister() {
         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
     }
-
-    private fun login() {
-        val email = binding.etEmail.text.toString().trim()
-        val password = binding.edPassword.text.toString().trim()
-
-        val params = HashMap<String?, String?>()
-        params["email"] = email
-        params["password"] = password
-
-        ApiInterface.create().login(params).enqueue(object : Callback<UserModel?> {
-            override fun onResponse(call: Call<UserModel?>, response: Response<UserModel?>) {
-                if (response.body() != null) {
-                    UserModel.currentUser.username = response.body()!!.username
-                    UserModel.currentUser.email = response.body()!!.email
-                    UserModel.currentUser.mobile = response.body()!!.mobile
-                    UserModel.currentUser.userId = response.body()!!.userId
-                    UserModel.currentUser.token = response.body()!!.token
-
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeNavigation())
-                }
-            }
-
-            override fun onFailure(call: Call<UserModel?>, t: Throwable) {
-
-            }
-        })
-
-    }
-
-
 }

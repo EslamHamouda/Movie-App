@@ -1,26 +1,25 @@
 package com.example.movieapp.auth.register.ui
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.movieapp.R
-import com.example.movieapp.auth.data.ApiInterface
-import com.example.movieapp.auth.data.UserModel
+import com.example.movieapp.MainActivity
+import com.example.movieapp.auth.view_model.AuthViewModel
+import com.example.movieapp.auth.data.RegisterRequest
 import com.example.movieapp.databinding.FragmentRegisterBinding
-import okhttp3.MediaType
-import okhttp3.RequestBody
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 
 class RegisterFragment : Fragment() {
     lateinit var binding: FragmentRegisterBinding
+    val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,37 +36,31 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.tvLogin.setOnClickListener { goLogin() }
-        binding.btnRegister.setOnClickListener { register() }
-    }
 
-    private fun register() {
-        val username = binding.etFullName.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
-        val email = binding.etEmail.text.toString().trim()
-        val mobile = binding.etPhoneNumber.text.toString().trim()
+        binding.btnRegister.setOnClickListener { viewModel.register(getRegisterData()) }
 
-        val jsonObject = JSONObject()
-        jsonObject.put("userName", username)
-        jsonObject.put("password", password)
-        jsonObject.put("email", email)
-        jsonObject.put("mobile", mobile)
-        val jsonObjectString = jsonObject.toString()
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObjectString)
-        ApiInterface.create().register(requestBody).enqueue(object : Callback<UserModel?> {
-            override fun onResponse(call: Call<UserModel?>, response: Response<UserModel?>) {
-                if (response.code() == 200) {
-                    goLogin()
-                } else {
-                    Log.d("LOL", "onResponse: ${response.code()}")
+        lifecycleScope.launch {
+            viewModel.registerResponse.observe(viewLifecycleOwner) {
+                if (it.isSuccessful){
+                    Toast.makeText(requireContext(),"Register success", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().finish()
+                }
+                else{
+
+                    Toast.makeText(requireContext(),"Register failed", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
 
-            override fun onFailure(call: Call<UserModel?>, t: Throwable) {
-                Log.d("LOL", "onFailure: ${t.message}")
-            }
-        })
-
+    private fun getRegisterData():RegisterRequest{
+        return RegisterRequest(binding.etFullName.text.toString(),
+            binding.etEmail.text.toString(),
+            binding.etPassword.text.toString(),
+            binding.etPhoneNumber.text.toString())
     }
 
     private fun goLogin() {

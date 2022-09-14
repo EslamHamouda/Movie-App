@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.home.data.ActorModel
+import com.example.movieapp.home.data.DataSource
 import com.example.movieapp.home.view_model.HomeViewModel
-import com.example.moviestorenew.home.data.DataSource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

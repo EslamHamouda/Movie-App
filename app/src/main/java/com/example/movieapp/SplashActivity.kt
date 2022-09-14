@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
         }, 3000)
     }
     private fun goOnboarding() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, AuthActivity::class.java))
         this.finish()
     }
 }

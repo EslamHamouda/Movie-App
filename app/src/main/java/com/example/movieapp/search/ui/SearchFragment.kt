@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
-import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentSearchBinding
-import com.example.moviestorenew.home.data.DataSource
+import com.example.movieapp.home.data.DataSource
 
 class SearchFragment : Fragment() {
     lateinit var binding:FragmentSearchBinding

@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentExpandedListBinding
-import com.example.movieapp.home.data.MovieModel
-import com.example.moviestorenew.home.data.DataSource
 
 class ExpandedListFragment : Fragment() {
     lateinit var binding: FragmentExpandedListBinding

@@ -5,14 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentHomeBinding
-import com.example.moviestorenew.home.data.DataSource
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabLayout
+import com.example.movieapp.home.data.DataSource
 
 
 class HomeFragment : Fragment() {
@@ -40,7 +35,8 @@ class HomeFragment : Fragment() {
 
     private fun toExpandedList()
     {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedListFragment("Action Movies",DataSource.getMovies().toTypedArray()))
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedListFragment("Action Movies",
+            DataSource.getMovies().toTypedArray()))
     }
 
 }

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.MovieCardBinding
-import com.example.movieapp.home.data.MovieModel
 import com.example.movieapp.home.data.MoviesModel
 
 class MoviesAdapter(

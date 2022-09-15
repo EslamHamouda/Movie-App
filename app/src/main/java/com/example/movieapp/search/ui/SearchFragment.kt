@@ -1,7 +1,6 @@
 package com.example.movieapp.search.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,6 @@ import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.movieapp.databinding.FragmentSearchBinding
-import com.example.movieapp.home.data.DataSource
-import com.example.movieapp.home.ui.MoviesAdapter
 import com.example.movieapp.search.view_model.SearchViewModel
 import kotlinx.coroutines.launch
 

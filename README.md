@@ -13,3 +13,4 @@
 - View Binding
 - Data Binding
 - Glide
+- WebView

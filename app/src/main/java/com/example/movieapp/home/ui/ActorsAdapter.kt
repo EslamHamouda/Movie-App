@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActorCardBinding
 import com.example.movieapp.home.data.ActorModel
-import com.example.movieapp.home.data.MovieModel
 
 class ActorsAdapter(
     private val actors: List<ActorModel>,private val flag:Boolean

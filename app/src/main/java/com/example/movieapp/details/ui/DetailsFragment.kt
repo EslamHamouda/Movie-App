@@ -1,16 +1,23 @@
 package com.example.movieapp.details.ui
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.MediaController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentDetailsBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class DetailsFragment : Fragment() {
@@ -33,23 +40,31 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mediaController=MediaController(requireContext())
-        binding.videoView.setVideoURI(Uri.parse("https://static.videezy.com/system/resources/previews/000/055/404/original/200921-LoopGreenLightPatternGrid.mp4"))
-        binding.videoView.setMediaController(mediaController)
-        binding.videoView.start()
-        binding.tvMovieName.text=args.item.title
-        binding.tvMovieRating.text= "4.5"
-        binding.tvDirectorName.text="William Charlly"
-        binding.tvMovieTime.text="1h 30m"
-        binding.tvCategoryName.text="Action"
-        binding.tvMovieYear.text="Aug 2018"
-        binding.tvMovieDescription.text="The Hobbit: The Battle of the Five Armies is a 2014 epic high fantasy adventure film directed by Peter Jackson from a screenplay by Fran Walsh, Philippa Boyens, Jackson, and Guillermo del Toro, based on the 1937 novel The Hobbit by J. R. R. Tolkien. The sequel to The Hobbit: The Desolation of Smaug (2013), it is the final instalment in The Hobbit trilogy, acting as a prequel to Jackson's The Lord of the Rings trilogy."
-
+        setMovieDetails()
         binding.arrowBack.setOnClickListener{goHome()}
     }
 
     private fun goHome(){
         findNavController().navigate(DetailsFragmentDirections.actionDetailsFragmentToHomeFragment())
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setMovieDetails(){
+
+        binding.videoView.webViewClient= WebViewClient()
+        binding.videoView.webChromeClient= WebChromeClient()
+        args.item.video?.let { binding.videoView.loadUrl(it) }
+        binding.videoView.settings.javaScriptEnabled=true
+        binding.videoView.settings.pluginState=WebSettings.PluginState.ON
+
+        binding.tvMovieName.text=args.item.movieName
+        binding.tvMovieRating.text= (1..5).random().toString()
+        binding.tvDirectorName.text=args.item.directorName
+        val time=args.item.time
+        binding.tvMovieTime.text = "${time?.div(60)}h ${time?.mod(60)}m"
+        binding.tvCategoryName.text=args.item.category
+        binding.tvMovieYear.text= args.item.releasedYear.toString()
+        binding.tvMovieDescription.text=args.item.description
     }
 
 }

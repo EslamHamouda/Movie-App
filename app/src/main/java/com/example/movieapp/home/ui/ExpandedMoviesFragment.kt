@@ -29,7 +29,7 @@ class ExpandedMoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvCategoryName.text=args.category
-        binding.rvExpandedMovieList.adapter=MoviesAdapter(args.list.asList(),true)
+        binding.rvExpandedMovieList.adapter=MoviesAdapter(args.list.toList(),true)
         binding.arrowBack.setOnClickListener{goHome()}
     }
 

@@ -30,4 +30,5 @@
     <string name="full_name">Full name</string>
     <string name="phone_number">Phone number</string>
     <string name="actors">Actors</string>
+    <string name="most_recent">Most recent</string>
 </resources>

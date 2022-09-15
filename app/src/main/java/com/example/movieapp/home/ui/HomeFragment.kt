@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.home.data.ActorModel
 import com.example.movieapp.home.data.DataSource
+import com.example.movieapp.home.data.MoviesModel
 import com.example.movieapp.home.view_model.HomeViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -21,7 +22,6 @@ class HomeFragment : Fragment() {
     val viewModel:HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getActors()
     }
 
     override fun onCreateView(
@@ -30,13 +30,28 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding=FragmentHomeBinding.inflate(inflater)
+        viewModel.getTopMovies()
+        viewModel.getActors()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvTopMovies.adapter = TopMoviesAdapter(DataSource.getTopMovies())
-        binding.rvActionMovies.adapter=MoviesAdapter(DataSource.getMovies(),false)
+
+        lifecycleScope.launch {
+            viewModel.getMostRecentMoviesLiveData.observe(viewLifecycleOwner) {
+                binding.rvTopMovies.adapter = it.body()?.let { it1 -> TopMoviesAdapter(it1) }
+            }
+        }
+
+
+        lifecycleScope.launch {
+            viewModel.getMostRecentMoviesLiveData.observe(viewLifecycleOwner) {list->
+                binding.rvMostRecentMovies.adapter = list.body()?.let { it1 -> MoviesAdapter(it1.reversed(),false) }
+                binding.tvMostRecentViewAll.setOnClickListener{toExpandedMovies(list)}
+            }
+        }
+
 
         lifecycleScope.launch {
             viewModel.getActorsLiveData.observe(viewLifecycleOwner) {list->
@@ -45,18 +60,20 @@ class HomeFragment : Fragment() {
             }
 
         }
-        //binding.rvActorsMovies.adapter=ActorsAdapter(DataSource.getMovies(),false)
-        binding.tvActionViewAll.setOnClickListener{toExpandedMovies()}
-        //binding.tvActorsViewAll.setOnClickListener{toExpandedActors()}
+
+
     }
 
-    private fun toExpandedMovies()
+    private fun toExpandedMovies(list:Response<List<MoviesModel>>)
     {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedMoviesFragment("Action Movies",DataSource.getMovies().toTypedArray()))
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedMoviesFragment("Most Recent",
+            list.body()!!.toTypedArray()
+        ))
     }
     private fun toExpandedActors(list:Response<List<ActorModel>>)
     {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedActorsFragment(list.body()!!.toTypedArray()))
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExpandedActorsFragment(
+            list.body()!!.toTypedArray()))
     }
 
 }

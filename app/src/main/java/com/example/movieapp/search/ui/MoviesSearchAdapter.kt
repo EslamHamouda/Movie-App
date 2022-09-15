@@ -2,32 +2,35 @@ package com.example.movieapp.search.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.MovieSearchCardBinding
 import com.example.movieapp.home.data.MovieModel
+import com.example.movieapp.home.data.MoviesModel
 
 class MoviesSearchAdapter(
-    private val movies: List<MovieModel>,
+    private var movies: List<MoviesModel>,
 ) : RecyclerView.Adapter<MoviesSearchAdapter.MoviesSearchViewHolder>() {
 
-    private var filter: List<MovieModel> = listOf()
-
     class MoviesSearchViewHolder(private val binding: MovieSearchCardBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MovieModel) {
+        fun bind(item: MoviesModel) {
             Glide
                 .with(itemView.context)
-                .load(item.imageURL)
+                .load(item.image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(binding.roundedImageView)
-            binding.tvMovieName.text = item.title
-            binding.tvMovieTime.text = item.duration.toString()
-            binding.tvMovieCategory.text = "Action"
-            binding.tvDirectorName.text="Otto Bathurst"
-            binding.tvMovieYear.text="2018"
-            binding.ratingBar.rating= 3.5F
+            binding.tvMovieName.text = item.movieName
+            binding.tvMovieTime.text = "${item.time?.div(60)}h ${item.time?.mod(60)}m"
+            binding.tvMovieCategory.text = item.category
+            binding.tvDirectorName.text=item.directorName
+            binding.tvMovieYear.text= item.releasedYear.toString()
+            binding.ratingBar.rating= (1..5).random().toFloat()
+            binding.item.setOnClickListener{
+                it.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment(item))
+            }
         }
     }
 
@@ -37,19 +40,13 @@ class MoviesSearchAdapter(
     }
 
     override fun onBindViewHolder(holder: MoviesSearchViewHolder, position: Int) {
-        holder.bind(filter[position])
+        holder.bind(movies[position])
     }
 
-    override fun getItemCount() = filter.size
+    override fun getItemCount() = movies.size
 
-    fun changeList(query: String?) {
-        filter = movies.filter {
-            it.title.contains(query as CharSequence)
-        }
-        notifyDataSetChanged()
-    }
     fun setEmpty() {
-        filter = emptyList()
+        movies = emptyList()
         notifyDataSetChanged()
     }
 

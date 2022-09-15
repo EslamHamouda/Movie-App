@@ -5,8 +5,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class HomeRepository(private val services: ServicesAPI) {
+
     suspend fun getActors() =
         withContext(Dispatchers.IO) {
             services.getActors()
+        }
+
+    suspend fun getTopMovies() =
+        withContext(Dispatchers.IO) {
+            services.getTopMovies()
         }
 }

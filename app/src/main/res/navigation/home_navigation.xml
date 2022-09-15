@@ -19,7 +19,11 @@
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_expandedActorsFragment"
             app:destination="@id/expandedActorsFragment"
@@ -38,7 +42,7 @@
             app:argType="string" />
         <argument
             android:name="list"
-            app:argType="com.example.movieapp.home.data.MovieModel[]" />
+            app:argType="com.example.movieapp.home.data.MoviesModel[]" />
         <action
             android:id="@+id/action_expandedMoviesFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -46,12 +50,27 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_expandedMoviesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.movieapp.search.ui.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.movieapp.details.ui.DetailsFragment"
@@ -59,7 +78,7 @@
         android:label="DetailsFragment" >
         <argument
             android:name="item"
-            app:argType="com.example.movieapp.home.data.MovieModel" />
+            app:argType="com.example.movieapp.home.data.MoviesModel" />
         <action
             android:id="@+id/action_detailsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />

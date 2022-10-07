@@ -45,8 +45,10 @@ class RegisterFragment : Fragment() {
             viewModel.registerResponse.observe(viewLifecycleOwner) {
                 if (it.isSuccessful){
                     Toast.makeText(requireContext(),"Register success", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(requireActivity(), MainActivity::class.java))
-                    requireActivity().finish()
+                    requireActivity().getSharedPreferences("uId",0).edit().putString("name",binding.etFullName.text.toString()).apply()
+                    /*startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().finish()*/
+                    findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
                 }
                 else{
 
@@ -57,7 +59,8 @@ class RegisterFragment : Fragment() {
     }
 
     private fun getRegisterData():RegisterRequest{
-        return RegisterRequest(binding.etFullName.text.toString(),
+        return RegisterRequest(
+            binding.etFullName.text.toString(),
             binding.etEmail.text.toString(),
             binding.etPassword.text.toString(),
             binding.etPhoneNumber.text.toString())

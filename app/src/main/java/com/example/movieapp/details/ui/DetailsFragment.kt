@@ -8,15 +8,23 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebViewClient
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.movieapp.databinding.FragmentDetailsBinding
+import com.example.movieapp.home.view_model.DetailsViewModel
 
 
 class DetailsFragment : Fragment() {
     lateinit var binding:FragmentDetailsBinding
     val args:DetailsFragmentArgs by navArgs()
+    val viewModel:DetailsViewModel by viewModels()
+
+    var userRate= -1
+    var flag=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,10 +44,30 @@ class DetailsFragment : Fragment() {
 
         setMovieDetails()
         binding.arrowBack.setOnClickListener{goHome()}
+
+
+        binding.userRating.onRatingBarChangeListener =
+            RatingBar.OnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                flag=true
+                userRate= rating.toInt()
+            }
+
+        binding.btnRate.setOnClickListener {
+            if (flag) {
+                rate(userRate)
+                Toast.makeText(requireContext(),"Thanks for your rating!",Toast.LENGTH_SHORT).show()
+
+            }else Toast.makeText(requireContext(),"Rate first!",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun goHome(){
         findNavController().navigate(DetailsFragmentDirections.actionDetailsFragmentToHomeFragment())
+    }
+
+    private fun rate(rating:Int){
+        val uId=requireActivity().getSharedPreferences("uId",0).getInt("id",-1)
+        viewModel.rate(args.item.movieId!!,uId,rating)
     }
 
     @SuppressLint("SetJavaScriptEnabled")

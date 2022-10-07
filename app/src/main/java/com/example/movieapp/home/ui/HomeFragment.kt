@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.home.data.ActorModel
 import com.example.movieapp.home.data.MoviesModel
+import com.example.movieapp.home.view_model.DetailsViewModel
 import com.example.movieapp.home.view_model.HomeViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -36,7 +38,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.tvName.text= getString(R.string.welcome_home_ahmed).plus(
+            requireActivity().getSharedPreferences("uId",0).getString("name",""))
         lifecycleScope.launch {
             viewModel.getMostRecentMoviesLiveData.observe(viewLifecycleOwner) {
                 binding.rvTopMovies.adapter = it.body()?.let { it1 -> TopMoviesAdapter(it1) }

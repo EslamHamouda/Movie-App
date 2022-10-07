@@ -189,10 +189,49 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            tools:text="The Hobbit: The Battle of the Five Armies is a 2014 epic high fantasy adventure film directed by Peter Jackson from a screenplay by Fran Walsh, Philippa Boyens, Jackson, and Guillermo del Toro, based on the 1937 novel The Hobbit by J. R. R. Tolkien. The sequel to The Hobbit: The Desolation of Smaug (2013), it is the final instalment in The Hobbit trilogy, acting as a prequel to Jackson's The Lord of the Rings trilogy."
             android:textColor="@android:color/holo_blue_dark"
             app:layout_constraintEnd_toEndOf="@+id/tv_movie_year"
             app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/textView12"
+            tools:text="The Hobbit: The Battle of the Five Armies is a 2014 epic high fantasy adventure film directed by Peter Jackson from a screenplay by Fran Walsh, Philippa Boyens, Jackson, and Guillermo del Toro, based on the 1937 novel The Hobbit by J. R. R. Tolkien. The sequel to The Hobbit: The Desolation of Smaug (2013), it is the final instalment in The Hobbit trilogy, acting as a prequel to Jackson's The Lord of the Rings trilogy." />
+
+        <TextView
+            android:id="@+id/tv_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_movie_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_movie_description"
+            tools:text="@string/rate_me" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/user_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:progressBackgroundTint="#514A37"
+            android:progressTint="#FBC02D"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:stepSize="0.5"
+            android:transformPivotX="0dp"
+            android:translationY="0dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_rate"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rate" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_rate"
+            android:background="@drawable/button_style_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="rate"
+            app:layout_constraintStart_toStartOf="@+id/user_rating"
+            app:layout_constraintTop_toBottomOf="@+id/user_rating" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

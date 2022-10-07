@@ -44,6 +44,7 @@ class LoginFragment : Fragment() {
             viewModel.loginResponse.observe(viewLifecycleOwner) {
                 if (it.isSuccessful){
                     Toast.makeText(requireContext(),"Login success", Toast.LENGTH_SHORT).show()
+                    requireActivity().getSharedPreferences("uId",0).edit().putInt("id",it.body()!!.userId!!).apply()
                     startActivity(Intent(requireActivity(),MainActivity::class.java))
                     requireActivity().finish()
                 }

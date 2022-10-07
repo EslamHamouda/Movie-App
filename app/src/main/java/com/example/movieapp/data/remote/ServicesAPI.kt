@@ -26,6 +26,11 @@ interface ServicesAPI {
     @GET("movies/name/{name}")
     suspend fun getMovieName(@Path("name")para:String): Response<List<MoviesModel>>
 
+    @GET("movies/rateMovie/{movieId}/{userId}/{rating}")
+    suspend fun rate(@Path("movieId")mId:Int,
+                     @Path("userId")uId:Int,
+                     @Path("rating")rate:Int): Response<String>
+
 
 
 

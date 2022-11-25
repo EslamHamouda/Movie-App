@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.movieapp.home.ui.HomeFragment"
+        android:name="com.example.movieapp.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/expandedMoviesFragment"
-        android:name="com.example.movieapp.home.ui.ExpandedMoviesFragment"
+        android:name="com.example.movieapp.ui.home.ExpandedMoviesFragment"
         tools:layout="@layout/fragment_expanded_movies"
         android:label="ExpandedMoviesFragment" >
         <argument
@@ -42,7 +42,7 @@
             app:argType="string" />
         <argument
             android:name="list"
-            app:argType="com.example.movieapp.home.data.MoviesModel[]" />
+            app:argType="com.example.movieapp.data.models.response.MoviesModel[]" />
         <action
             android:id="@+id/action_expandedMoviesFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.movieapp.search.ui.SearchFragment"
+        android:name="com.example.movieapp.ui.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search">
         <action
@@ -73,19 +73,19 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.movieapp.details.ui.DetailsFragment"
+        android:name="com.example.movieapp.ui.details.DetailsFragment"
         tools:layout="@layout/fragment_details"
         android:label="DetailsFragment" >
         <argument
             android:name="item"
-            app:argType="com.example.movieapp.home.data.MoviesModel" />
+            app:argType="com.example.movieapp.data.models.response.MoviesModel" />
         <action
             android:id="@+id/action_detailsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/expandedActorsFragment"
-        android:name="com.example.movieapp.home.ui.ExpandedActorsFragment"
+        android:name="com.example.movieapp.ui.home.ExpandedActorsFragment"
         tools:layout="@layout/fragment_expanded_actors"
         android:label="ExpandedActorsFragment" >
         <action
@@ -97,6 +97,6 @@
             app:popExitAnim="@android:anim/slide_out_right" />
         <argument
             android:name="list"
-            app:argType="com.example.movieapp.home.data.ActorModel[]" />
+            app:argType="com.example.movieapp.data.models.response.ActorModel[]" />
     </fragment>
 </navigation>

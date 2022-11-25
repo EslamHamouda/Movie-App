@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_color"
         app:layoutDescription="@xml/fragment_home_xml_constraintlayout2_scene"
-        tools:context=".home.ui.HomeFragment">
+        tools:context=".ui.home.HomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

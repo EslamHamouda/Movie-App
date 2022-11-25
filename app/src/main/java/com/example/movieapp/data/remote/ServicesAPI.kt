@@ -1,10 +1,10 @@
 package com.example.movieapp.data.remote
 
-import com.example.movieapp.auth.data.LoginResponse
-import com.example.movieapp.auth.data.RegisterRequest
-import com.example.movieapp.auth.data.RegisterResponse
-import com.example.movieapp.home.data.ActorModel
-import com.example.movieapp.home.data.MoviesModel
+import com.example.movieapp.data.models.response.LoginResponse
+import com.example.movieapp.data.models.request.RegisterRequest
+import com.example.movieapp.data.models.response.RegisterResponse
+import com.example.movieapp.data.models.response.ActorModel
+import com.example.movieapp.data.models.response.MoviesModel
 import retrofit2.Response
 import retrofit2.http.*
 
